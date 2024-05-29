@@ -17,10 +17,8 @@ const SpacificPage = () => {
       .catch((err) => {
         console.log(err, "Error");
       });
-  }, [singleData]);
-
-  console.log(singleData);
-
+  }, []);
+  
   return (
     <div>
       <Typography component={"h6"}>{singleData?.id}</Typography>

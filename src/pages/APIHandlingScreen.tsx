@@ -2,25 +2,21 @@ import { Box, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Table from "../Components/Table";
+import { Link } from "react-router-dom";
 
 export default function APIHandlingScreen() {
   const [usersList, setUsersList] = useState<any>([]);
 
-  const getApiData = () => {
+  useEffect(() => {
     axios
       .get("https://jsonplaceholder.typicode.com/comments")
       .then((res) => {
-        console.log(res);
         setUsersList([...res.data]);
       })
       .catch((err) => {
         console.log(err, "Error");
       });
-  };
-
-  useEffect(() => {
-    getApiData();
-  }, [usersList]);
+  }, []);
 
   return (
     <>
@@ -42,36 +38,42 @@ export default function APIHandlingScreen() {
             {
               key: "",
               label: "View",
-              displayField: (rows:any) => (
-               <Box>
-                <Button
-                color="info"
-                href={`/user-id/${rows?.id}`}
-                sx={{fontSize:'13px' ,marginLeft:'10px',marginRight:'10px'}}
-                variant="text"
-                >
-                View
-              </Button>
-              </Box>
+              displayField: (rows: any) => (
+                <Box>
+                  <Link
+                    color="info"
+                    to={`/user-id/${rows?.id}`}
+                    style={{
+                      fontSize: "16px",
+                      marginLeft: "10px",
+                      marginRight: "10px",
+                      color: "green",
+                    }}
+                  >
+                    View
+                  </Link>
+                </Box>
               ),
             },
             {
               key: "",
               label: "Delete",
-              displayField: (rows:any) => (
-               <Box>
-                <Button
-                color="success"
-                sx={{fontSize:'15px' ,marginLeft:'10px',marginRight:'10px',}}
-                variant="text"
-                >
-                Delete
-              </Button>
-              </Box>
+              displayField: (rows: any) => (
+                <Box>
+                  <Button
+                    color="success"
+                    sx={{
+                      fontSize: "15px",
+                      marginLeft: "10px",
+                      marginRight: "10px",
+                    }}
+                    variant="text"
+                  >
+                    Delete
+                  </Button>
+                </Box>
               ),
             },
-           
-           
           ]}
           datasource={usersList}
         />
