@@ -1,13 +1,9 @@
-import React from 'react';
-
-import './App.css';
-// import Table from './Components/Table';
-import APIHandlingScreen from './pages/APIHandlingScreen';
+import "./App.css";
+import APIHandlingScreen from "./pages/APIHandlingScreen";
+import AppRouter from "./router/AppRouter";
 
 function App() {
-  return (
-   <APIHandlingScreen/>
-  );
+  return <AppRouter />;
 }
 
 export default App;
